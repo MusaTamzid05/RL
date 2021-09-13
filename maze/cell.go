@@ -26,3 +26,23 @@ func (c *Cell) GetCurrentState() string {
 	}
 	return string(c.cellType)
 }
+
+func (c *Cell) GetPosition() (int, int) {
+	if c.index < 5 {
+		return 0, c.index
+	}
+
+	if c.index < 10 {
+		return 1, c.index - 5
+	}
+
+	if c.index < 15 {
+		return 2, c.index - 10
+	}
+
+	if c.index < 20 {
+		return 3, c.index - 15
+	}
+
+	return 4, c.index - 20
+}
