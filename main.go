@@ -4,5 +4,5 @@ import "rl/maze"
 
 func main() {
 	maze := maze.New()
-	maze.Test()
+	maze.Show()
 }
