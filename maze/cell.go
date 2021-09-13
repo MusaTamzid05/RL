@@ -4,7 +4,7 @@ type CellType string
 
 const (
 	Goal     CellType = "G"
-	Wall              = "W"
+	Way               = "W"
 	Obstacle          = "O"
 	Bomb              = "B"
 )
