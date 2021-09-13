@@ -36,6 +36,7 @@ func (m *Maze) initCells() {
 
 func (m *Maze) Show() {
 
+	fmt.Println("=====================")
 	for i := 0; i < m.totalCells; i += 1 {
 		if i != 0 && i%5 == 0 {
 			fmt.Printf("\n")
@@ -43,6 +44,7 @@ func (m *Maze) Show() {
 		fmt.Printf("%s", m.cells[i].GetCurrentState())
 	}
 	fmt.Println("")
+	fmt.Println("=====================")
 
 }
 

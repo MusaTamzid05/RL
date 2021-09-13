@@ -30,16 +30,17 @@ type Agent struct {
 func (a *Agent) Run() {
 
 	done := false
+	steps := 0
 
 	for !done {
 		nextAction := Action(generateNumber(4))
 		done = a.maze.Update(nextAction)
-		fmt.Println("=====================")
 		a.maze.Show()
-		fmt.Println("=====================")
+		steps += 1
 
 	}
 
+	fmt.Println("Total steps :", steps)
 }
 
 func NewAgent() *Agent {
