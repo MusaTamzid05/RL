@@ -56,7 +56,6 @@ func (m *Maze) Update(action Action) bool {
 	}
 
 	nextIndex := m.getIndexFrom(nextRow, nextCol)
-	fmt.Println(nextRow, nextCol)
 
 	if m.shouldUpdate(nextIndex) {
 		m.update(nextIndex)
@@ -96,7 +95,7 @@ func (m *Maze) isValid(row, col int) bool {
 	// Wont work if cells count is
 	// not 25
 
-	if row < 0 || row > 5 || col < 0 || col > 4 {
+	if row < 0 || row > 4 || col < 0 || col > 4 {
 		return false
 	}
 

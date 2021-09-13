@@ -1,6 +1,7 @@
 package maze
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -33,7 +34,9 @@ func (a *Agent) Run() {
 	for !done {
 		nextAction := Action(generateNumber(4))
 		done = a.maze.Update(nextAction)
+		fmt.Println("=====================")
 		a.maze.Show()
+		fmt.Println("=====================")
 
 	}
 
