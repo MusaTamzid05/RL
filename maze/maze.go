@@ -1,6 +1,8 @@
 package maze
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Maze struct {
 	cells       []Cell
@@ -30,10 +32,6 @@ func (m *Maze) initCells() {
 	m.cells[20].cellType = Obstacle
 	m.cells[24].cellType = Bomb
 
-	for i := 0; i < m.totalCells; i += 1 {
-		row, col := m.cells[i].GetPosition()
-		fmt.Printf("%d = (%d, %d)\n", i, row, col)
-	}
 }
 
 func (m *Maze) Show() {
@@ -48,10 +46,88 @@ func (m *Maze) Show() {
 
 }
 
-func (m *Maze) Update(action int) bool {
+func (m *Maze) Update(action Action) bool {
+	doneFlag := false
+	playerRow, playerCol := m.cells[m.playerIndex].GetPosition()
+	nextRow, nextCol := m.getNextPositionFrom(action, playerRow, playerCol)
+
+	if !m.isValid(nextRow, nextCol) {
+		return doneFlag
+	}
+
+	nextIndex := m.getIndexFrom(nextRow, nextCol)
+	fmt.Println(nextRow, nextCol)
+
+	if m.shouldUpdate(nextIndex) {
+		m.update(nextIndex)
+
+	}
+
+	if m.goalReached() {
+		doneFlag = true
+	}
+
+	return doneFlag
+
+}
+
+func (m *Maze) getNextPositionFrom(action Action, row, col int) (int, int) {
+
+	if action == Up {
+		row -= 1
+	}
+
+	if action == Down {
+		row += 1
+	}
+
+	if action == Left {
+		col -= 1
+	}
+
+	if action == Right {
+		col += 1
+	}
+
+	return row, col
+}
+
+func (m *Maze) isValid(row, col int) bool {
+	// Wont work if cells count is
+	// not 25
+
+	if row < 0 || row > 5 || col < 0 || col > 4 {
+		return false
+	}
+
+	return true
+}
+
+func (m *Maze) getIndexFrom(row, col int) int {
+
+	// Bad code!! Wont work unless the
+	// total cell count is 25
+	return row + col + (4 * row)
+}
+func (m *Maze) shouldUpdate(index int) bool {
+	if m.cells[index].cellType == Obstacle {
+		return false
+	}
+	return true
+}
+
+func (m *Maze) update(index int) {
+	m.cells[m.playerIndex].playerFlag = false
+	m.playerIndex = index
+	m.cells[m.playerIndex].playerFlag = true
+}
+
+func (m *Maze) goalReached() bool {
+	if m.cells[m.playerIndex].cellType == Goal || m.cells[m.playerIndex].cellType == Bomb {
+		return true
+	}
 
 	return false
-
 }
 
 func New() *Maze {

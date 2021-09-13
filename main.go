@@ -3,6 +3,6 @@ package main
 import "rl/maze"
 
 func main() {
-	maze := maze.New()
-	maze.Show()
+	agent_ := maze.NewAgent()
+	agent_.Run()
 }

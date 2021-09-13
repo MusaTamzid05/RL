@@ -28,6 +28,8 @@ func (c *Cell) GetCurrentState() string {
 }
 
 func (c *Cell) GetPosition() (int, int) {
+	// Bad code!! Wont work unless the
+	// total cell count is 25
 	if c.index < 5 {
 		return 0, c.index
 	}
@@ -45,4 +47,11 @@ func (c *Cell) GetPosition() (int, int) {
 	}
 
 	return 4, c.index - 20
+}
+
+func (c *Cell) GetIndexFrom(row, col int) int {
+
+	// Bad code!! Wont work unless the
+	// total cell count is 25
+	return row + col + (4 * row)
 }
