@@ -14,6 +14,8 @@ func (m *Maze) initCells() {
 		m.cells = append(m.cells, Cell{index: i, cellType: Way})
 	}
 
+	m.cells[0].playerFlag = true
+
 	m.cells[4].cellType = Goal
 	m.cells[1].cellType = Obstacle
 	m.cells[2].cellType = Obstacle
